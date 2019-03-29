@@ -21,9 +21,9 @@ function sanitize(input){
 }
 
 if (require.main == module) {
-
   const strTest = 'HEY: ThIs Is hArD tO rEaD!';
-
+  
+  console.log('The sanitized string for "', strTest, '" is "', sanitize(strTest), '"');
 }
 
 module.exports = { itemCounts, stringToCharacters, sanitize};
