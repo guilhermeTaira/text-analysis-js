@@ -1,4 +1,6 @@
-const { itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics} = require('../textalyze');
+const {
+  itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics, sortMap,
+} = require('../textalyze');
 
 describe('itemCount', () => {
   test('returns a count of the strings in the array', () => {
@@ -106,8 +108,6 @@ describe('onlyCharacters', () => {
   });
 });
 
-//basicFrequencyStatistics
-
 describe('basicFrequencyStatistics', () => {
   test('returns a Map containing item/frequency pairs', () => {
     const input = ['a', 'a', 'b', 'b', 'c'];
@@ -121,5 +121,21 @@ describe('basicFrequencyStatistics', () => {
     const expectedOutput = new Map();
 
     expect(basicFrequencyStatistics(input)).toEqual(expectedOutput);
+  });
+});
+
+describe('sortMap', () => {
+  test('returns a Map with sorted pairs', () => {
+    const input = new Map([['d', 4], ['c', 3], ['a', 1], ['b', 2]]);
+    const expectedOutput = new Map([['a', 1], ['b', 2], ['c', 3], ['d', 4]]);
+
+    expect(sortMap(input)).toEqual(expectedOutput);
+  });
+
+  test('returns an empty hash when the map is empty', () => {
+    const input = new Map();
+    const expectedOutput = new Map();
+
+    expect(sortMap(input)).toEqual(expectedOutput);
   });
 });
