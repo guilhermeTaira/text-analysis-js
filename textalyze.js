@@ -32,16 +32,27 @@ function getFilePath(){
   return procArgv.slice(2).toString();
 }
 
+function basicFrequencyStatistics(arr){
+  let charCount = arr.length;
+  let mapCount = itemCounts(arr);
+
+  mapCount.forEach(function(value, key) {
+    mapCount.set(key, value /charCount);
+  });
+
+  return mapCount;
+}
+
 function letterCountStatistics(path){
   fs.readFile(path,'utf8', (err, data) => {
     if (err) throw err;
 
     let cleanedData = onlyCharacters(sanitize(data));
 
-    let count = itemCounts(stringToCharacters(cleanedData));
+    let count = basicFrequencyStatistics(stringToCharacters(cleanedData));
 
     count.forEach(function(value, key) {
-      console.log(key, '   ', value);
+      console.log(key, '   ', (value * 100).toFixed(2));
     });
   }); 
 }
@@ -53,4 +64,4 @@ if (require.main == module) {
   letterCountStatistics(filePath);
 }
 
-module.exports = { itemCounts, stringToCharacters, sanitize, onlyCharacters};
+module.exports = { itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics};

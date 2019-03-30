@@ -1,4 +1,4 @@
-const { itemCounts, stringToCharacters, sanitize, onlyCharacters} = require('../textalyze');
+const { itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics} = require('../textalyze');
 
 describe('itemCount', () => {
   test('returns a count of the strings in the array', () => {
@@ -103,5 +103,23 @@ describe('onlyCharacters', () => {
     const expectedOutput = '';
 
     expect(onlyCharacters(input)).toEqual(expectedOutput);
+  });
+});
+
+//basicFrequencyStatistics
+
+describe('basicFrequencyStatistics', () => {
+  test('returns a Map containing item/frequency pairs', () => {
+    const input = ['a', 'a', 'b', 'b', 'c'];
+    const expectedOutput = new Map([['a', 0.4], ['b', 0.4], ['c', 0.2]]);
+
+    expect(basicFrequencyStatistics(input)).toEqual(expectedOutput);
+  });
+
+  test('returns an empty hash when array is empty', () => {
+    const input = [];
+    const expectedOutput = new Map();
+
+    expect(basicFrequencyStatistics(input)).toEqual(expectedOutput);
   });
 });
