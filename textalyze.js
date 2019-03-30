@@ -43,6 +43,30 @@ function basicFrequencyStatistics(arr){
   return mapCount;
 }
 
+function sortMap(map){
+  var sortedMap = new Map();
+  var keys = [];
+  
+  map.forEach(function callback(value, key) {
+    keys.push(key);
+  });
+
+  keys.sort().map(function(key) {
+    sortedMap.set(key, map.get(key));
+  });
+
+  return sortedMap;
+}
+
+function printHistogram(freqMap){
+  freqMap.forEach(function(value, key) { 
+    let freqVal = (value * 100).toFixed(2);
+    let bars = freqVal/0.2;
+
+    console.log(`${key} [${' '.repeat(2 - freqVal.indexOf('.'))}${freqVal}%] ${'='.repeat(bars)}`);
+  });
+}
+
 function letterCountStatistics(path){
   fs.readFile(path,'utf8', (err, data) => {
     if (err) throw err;
@@ -51,9 +75,7 @@ function letterCountStatistics(path){
 
     let count = basicFrequencyStatistics(stringToCharacters(cleanedData));
 
-    count.forEach(function(value, key) {
-      console.log(key, '   ', (value * 100).toFixed(2));
-    });
+    printHistogram(sortMap(count));
   }); 
 }
 
@@ -64,4 +86,4 @@ if (require.main == module) {
   letterCountStatistics(filePath);
 }
 
-module.exports = { itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics};
+module.exports = { itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics, sortMap};
