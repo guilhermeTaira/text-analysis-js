@@ -1,4 +1,6 @@
-const { itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics, sortMap} = require('../textalyze');
+const {
+  itemCounts, stringToCharacters, sanitize, onlyCharacters, basicFrequencyStatistics, sortMap,
+} = require('../textalyze');
 
 describe('itemCount', () => {
   test('returns a count of the strings in the array', () => {
@@ -124,8 +126,8 @@ describe('basicFrequencyStatistics', () => {
 
 describe('sortMap', () => {
   test('returns a Map with sorted pairs', () => {
-    const input = new Map([['d', 4], ['c', 3], ['a', 1], ['b',2]]);
-    const expectedOutput = new Map([['a', 1], ['b', 2], ['c', 3], ['d',4]]);
+    const input = new Map([['d', 4], ['c', 3], ['a', 1], ['b', 2]]);
+    const expectedOutput = new Map([['a', 1], ['b', 2], ['c', 3], ['d', 4]]);
 
     expect(sortMap(input)).toEqual(expectedOutput);
   });
